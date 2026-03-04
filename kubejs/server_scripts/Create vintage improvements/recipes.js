@@ -23,6 +23,7 @@ ServerEvents.recipes(e => {
     .secondaryFluidOutput(0)
     .superheated()
     .id("createdelight:pressurizing/sulfur_trioxide")
+    e.remove({id: "vintageimprovements:grinder_polishing/rose_quartz"})
     e.recipes.createmetallurgy.grinding(
         [
             '2x create:polished_rose_quartz',
