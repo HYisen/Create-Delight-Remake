@@ -37,12 +37,6 @@ jobs:
         with:
           file: modpack.toml
           field: 'name'
-      - name: 读取整合包版本号
-        uses: SebRollen/toml-action@v1.2.0
-        id: read-version
-        with:
-          file: modpack.toml
-          field: 'version'
       - name: 读取mc版本号
         uses: SebRollen/toml-action@v1.2.0
         id: read-minecraft
@@ -58,10 +52,7 @@ jobs:
       - name: 生成整合包版本号
         id: generate_modpack_version
         run: |
-          VERSION="${{ steps.read-version.outputs.value }}"
-          if [[ "${{ github.ref_name }}" == *test* ]]; then
-            VERSION="$VERSION-test-build-${{ github.run_number }}"
-          fi
+          VERSION="nightly"
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
   # 客户端相关任务（并行执行）
