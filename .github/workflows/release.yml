@@ -3,10 +3,8 @@ name: 发布版本
 on:
   push:
     branches:
-      - release*       # 匹配主发布分支
-      - test-*         # 匹配所有 test- 开头的分支（通配符）
-    tags:
-      - 'v*'           # 匹配版本标签触发
+      - nightly
+
 env:
   VERSION_FILE_PATH: config/fancymenu/assets/version.md
   PACKWIZ_DOWNLOAD_URL: https://github.com/Jasons-impart/packwiz/releases/latest/download/packwiz
@@ -75,12 +73,6 @@ jobs:
       MODPACK_VERSION: ${{ needs.common-steps.outputs.modpack_ver }}
       MC_VERSION: ${{ needs.common-steps.outputs.mc_version }}
       FORGE_VERSION: ${{ needs.common-steps.outputs.forge_version }}
-    if: >
-      startsWith(github.ref_name, 'release') || 
-      startsWith(github.ref_name, 'test-release') ||
-      startsWith(github.ref_name, 'test-client') ||
-      startsWith(github.ref_name, 'test-patch') ||
-      startsWith(github.ref_name, 'v')
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
